@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { createContext, useContext, useState } from "react";
+import { use } from "react";
 
 const ApiContext = createContext();
 
 
-const ApiProvider = () => {
+const ApiProvider = ({children}) => {
+  const API_URL = "http://localhost:5000/api";
+
   return (
-    <div>ApiContext</div>
+   <ApiContext.Provider value={{API_URL}}>
+    {children}
+   </ApiContext.Provider>
   )
 }
 
-export default ApiContext
+const useApiContext = () => useContext(ApiContext);
+
+export {ApiProvider, useApiContext};
